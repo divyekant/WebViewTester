@@ -3,19 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <!-- <meta name="viewport" content="width=500, initial-scale=1" /> -->
-    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=2.5, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Single Page Modal</title>
-    <!--
-        Instructions:
-        [ ] Copy this HTML into the Braze Dashboard IAM message composer
-        [ ] Upload and swap out all images (eg: https://via.placeholder.com/450 -> your new image URL)
-        [ ] Change the `href="#"` to `href="https://your-link" or `href="your://deeplink"`
-        [ ] Change button text
-    -->
     <style>
-        /* fonts */
+        
          @font-face {
             font-family: 'Helvetica';
             src: url('https://braze-images.com/appboy/communication/assets/font_assets/files/65ba56d853d681004c9822e7/original.otf?1706710744') format('truetype');
@@ -36,20 +28,20 @@
             --body-font-stack: 'CustomRegularFont', helvetica, arial, sans-serif;
         }
 
-        /* Box sizing rules */
+        
         *,
         *::before,
         *::after {
             box-sizing: border-box;
         }
 
-        /* Remove default padding */
+        
         ul[class],
         ol[class] {
             padding: 0;
         }
 
-        /* Remove default margin */
+        
         body,
         h1,
         h2,
@@ -67,9 +59,10 @@
             margin: 0;
         }
 
-        /* Set core body defaults */
+        
         body {
             min-height: 100vh;
+            max-width : 100vw;
             scroll-behavior: smooth;
             text-rendering: optimizeSpeed;
             line-height: 1.5;
@@ -77,29 +70,29 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Remove list styles on ul, ol elements with a class attribute */
+        
         ul[class],
         ol[class] {
             list-style: none;
         }
 
-        /* A elements that don't have a class get default styles */
+        
         a:not([class]) {
             text-decoration-skip-ink: auto;
         }
 
-        /* Make images easier to work with */
+        
         img {
             max-width: 100%;
             display: block;
         }
 
-        /* Natural flow and rhythm in articles by default */
+        
         article>*+* {
             margin-top: 1em;
         }
 
-        /* Inherit fonts for inputs and buttons */
+        
         input,
         button,
         a,
@@ -122,9 +115,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.85); /* Black with 75% transparency */
-            z-index: 1000; /* Ensure overlay is above other content */
-            display: flex;
+            background-color: rgba(0, 0, 0, 0.85); 
+            z-index: 1000; 
+            display: inline-block;
             justify-content: center;
             align-items: center;
 }
@@ -252,12 +245,16 @@
             display: none !important;
         }
 
+
+
+
+
         /*Phones*/
-        @media (max-width: 900px) {
+        @media (max-width: 920px) {
             .modal {
                 height: auto;
-                max-width: 320px;
-                flex-basis: 320px;
+                max-width: 330px;
+                flex-basis: 330px;
                 margin: auto;
                 display: flex;
                 flex-direction: column;
@@ -302,8 +299,8 @@
             }
 
             .modal__image {
-                height: 320px;
-                flex-basis: 320px;
+                height: 330px;
+                flex-basis: 330px;
                 position: relative;
                 overflow: hidden;
             }
@@ -313,7 +310,7 @@
                 flex-direction: column;
                 position: relative;
                 height: auto;
-                max-width: 320px;
+                max-width: 330px;
                 flex-basis: auto;
                 padding: 24px 16px 24px 16px;
                 background: linear-gradient(180deg, #ffffff, #ffffff);
@@ -350,7 +347,7 @@
             .modal {
                 display: flex;
                 flex-direction: row;
-                height: 320px;
+                height: 330px;
                 margin: auto;
             }
 
@@ -383,8 +380,16 @@
 <body>
     <div class="overlay">
         <div class="modal">
+            <button data-button-id="close" class="modal__cross">
+                <p class="modal__cross__new">
+
+Dismiss
+
+
+</p>
+            </button>
             <a data-button-id="banner" href="picsart://miniapp_2_editor?package-id=com.picsart.edit.logo-generator&is_auto_close_enabled=false">
-            <div class="modal__image">
+            <div class="modal modal__image">
     <video id="promoVideo" preload="auto" autoplay muted playsinline loop>
         <source src="https://pastatic.picsart.com/cms-pastatic/ba7a8f37-f8a2-4f0f-9e28-8c34b38d7ce9.mp4" type="video/mp4">
     </video>
@@ -394,9 +399,9 @@
         const videoModal = document.getElementById('videoModal');
         const promoVideo = document.getElementById('promoVideo');
 
-        // Function to show the modal and play the video
+        
         openModalBtn.addEventListener('click', () => {
-            videoModal.style.display = 'flex'; // Show the modal
+            videoModal.style.display = 'flex'; 
             promoVideo.play().catch((error) => {
                 console.log('Autoplay blocked, waiting for interaction.', error);
                 document.body.addEventListener('click', () => {
@@ -405,11 +410,11 @@
             });
         });
 
-        // Close the modal when the dismiss button is clicked
+        
         document.querySelector('[data-button-id="close"]').addEventListener('click', () => {
             videoModal.style.display = 'none';
-            promoVideo.pause(); // Pause the video when closing
-            promoVideo.currentTime = 0; // Reset video to start
+            promoVideo.pause(); 
+            promoVideo.currentTime = 0; 
         });
     </script>
 
@@ -417,7 +422,7 @@
                 <button data-button-id="close" class="modal__cross modal__cross-web">
                     <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M14.4175 16.8419L8.51467 10.9391C7.8452 10.2696 7.8452 9.18422 8.51467 8.51475C9.18414 7.84528 10.2696 7.84528 10.939 8.51475L16.8418 14.4176L22.7446 8.51475C23.4141 7.84528 24.4995 7.84528 25.169 8.51475C25.8385 9.18422 25.8385 10.2696 25.169 10.9391L19.2662 16.8419L25.169 22.7447C25.8385 23.4142 25.8385 24.4996 25.169 25.1691C24.4995 25.8386 23.4141 25.8386 22.7446 25.1691L16.8418 19.2663L10.939 25.1691C10.2696 25.8386 9.18414 25.8386 8.51467 25.1691C7.8452 24.4996 7.8452 23.4142 8.51467 22.7447L14.4175 16.8419Z"
+                            d="M14.4175 16.8419L8.51467 10.9391C7.8452 10.2696 7.8452 9.18422 8.51467 8.51475C9.18414 7.84528 10.2696 7.84528 10.939 8.51475L16.8418 14.4176L22.7446 8.51475C23.4141 7.84528 24.4995 7.84528 25.169 8.51475C25.8385 9.18422 25.8385 10.2696 25.169 10.9391L19.2662 16.8419L25.169 22.7447C25.8385 23.4142 25.8385 24.4996 25.169 25.1691C24.4995 25.8386 23.4141 25.8386 22.7446 25.1691L16.8418 19.2663L10.939 25.1691C10.2696 25.8386 9.18414 25.8386 8.51467 25.1691C7.8452 24.4996 7.8452 23.4142 8.51467 22.7447L14.4175 16.8419Z">
                     </svg>
                 </button>
                 <p class="modal__title">
@@ -435,7 +440,7 @@ Upload an image, get a logo—it’s that easy.
                     
                     <a href="picsart://miniapp_2_editor?package-id=com.picsart.edit.logo-generator&is_auto_close_enabled=false" class="modal__btn modal__btn--main" data-button-id="0">
 
-Try AI Logo Maker DK
+Try AI Logo Maker
 
 </a>
                 </div>
