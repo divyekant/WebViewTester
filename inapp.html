@@ -2,19 +2,19 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
         body {
             margin: 0;
             padding: 0;
             background: rgba(0, 0, 0, 0.85);
-            position: absolute;
             width: 324px;
             height: 544px;
             display: flex;
             flex-direction: column;
             align-items: center;
             font-family: sans-serif;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
         }
 
         .card {
@@ -23,12 +23,15 @@
             margin-top: 20px;
             border-radius: 20px;
             overflow: hidden;
+            display: flex;
+            flex-direction: column; /* Force vertical layout in portrait */
         }
 
         .video {
-            width: 100%;
+            width: 300px;
             height: 220px;
             background: black;
+            flex-shrink: 0; /* Prevent video from shrinking */
         }
 
         video {
@@ -40,6 +43,7 @@
         .content {
             padding: 16px;
             text-align: center;
+            width: 300px; /* Force width in portrait */
         }
 
         h1 {
@@ -72,14 +76,15 @@
             padding: 8px;
         }
 
-        @media (orientation: landscape) {
+        /* Only apply landscape styles when actually in landscape */
+        @media screen and (orientation: landscape) {
             body {
                 width: 544px;
                 height: 324px;
             }
 
             .card {
-                display: flex;
+                flex-direction: row; /* Switch to horizontal layout */
                 width: 520px;
                 height: 260px;
             }
@@ -91,6 +96,7 @@
 
             .content {
                 flex: 1;
+                width: auto; /* Reset width */
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -109,7 +115,7 @@
         <div class="content">
             <h1>How do you create a logo?</h1>
             <p>Upload an image, get a logo—it's that easy.</p>
-            <a href="picsart://miniapp_2_editor?package-id=com.picsart.edit.logo-generator&is_auto_close_enabled=false" class="button">Try AI Logo Maker DK2</a>
+            <a href="picsart://miniapp_2_editor?package-id=com.picsart.edit.logo-generator&is_auto_close_enabled=false" class="button">Try AI Logo Maker DK12</a>
         </div>
     </div>
     <button class="dismiss">Dismiss</button>
