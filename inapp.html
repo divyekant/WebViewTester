@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>Modal</title>
     <style>
-        /* Box sizing rules */
         *,
         *::before,
         *::after {
@@ -16,9 +15,9 @@
 
         body {
             min-height: 100vh;
-            scroll-behavior: smooth;
             text-rendering: optimizeSpeed;
             line-height: 1.5;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         .overlay {
@@ -30,127 +29,116 @@
             background-color: rgba(0, 0, 0, 0.85);
             z-index: 1000;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
 
         .modal {
-            display: flex;
-            height: 350px;
-            max-width: 1100px;
-            flex-basis: 900px;
-            margin: auto;
+            position: relative;
+            width: 100%;
+            max-width: 320px;
+            margin: 20px;
             background: white;
-            border-radius: 26px;
-        }
-
-        .modal__image {
-            height: 450px;
-            max-width: 450px;
-            flex-basis: 450px;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center center;
-            border-top-left-radius: 26px;
-            border-bottom-left-radius: 26px;
+            border-radius: 24px;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        .modal__image video {
+        .modal__video-container {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            background: black;
+        }
+
+        .modal__video-container video {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
         .modal__content {
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            height: 450px;
-            max-width: 450px;
-            flex-basis: 450px;
-            padding: 60px 40px 40px;
+            padding: 24px;
+            text-align: center;
             background: white;
-            border-top-right-radius: 26px;
-            border-bottom-right-radius: 26px;
         }
 
         .modal__title {
-            width: 300px;
-            padding: 5px 10px;
-            font-size: 36px;
+            font-size: 28px;
             line-height: 1.2;
-            color: #000000;
-            text-align: center;
+            color: #000;
+            margin-bottom: 12px;
+            font-weight: 600;
         }
 
         .modal__text {
             font-size: 15px;
-            color: #000000;
-            line-height: 1.5;
-            text-align: center;
-            padding: 10px;
-        }
-
-        .modal__button-wrap {
-            margin-top: auto;
-            text-align: center;
-            justify-content: center;
-            display: flex;
+            color: #333;
+            margin-bottom: 24px;
         }
 
         .modal__btn {
-            color: #F5F5F5;
-            min-height: 40px;
-            align-items: center;
-            display: flex;
-            justify-content: center;
-            min-width: 230px;
-            text-align: center;
-            font-size: 24px;
-            border-radius: 26px;
-            margin-right: 5px;
-            margin-bottom: 5px;
-            text-decoration: none;
-        }
-
-        .modal__btn--main {
-            margin-left: 0px;
-            padding: 8px 26px;
-            background-color: #C209C1;
+            background: #C209C1;
             color: white;
+            padding: 12px 24px;
+            border-radius: 24px;
             font-size: 15px;
-            min-width: 230px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            min-width: 200px;
+            text-align: center;
         }
 
-        /* Mobile styles */
-        @media (max-width: 900px) {
+        .dismiss-btn {
+            color: white;
+            background: transparent;
+            border: none;
+            padding: 16px;
+            margin-top: 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Landscape Mode */
+        @media (orientation: landscape) {
             .modal {
-                height: auto;
-                max-width: 320px;
-                flex-basis: 320px;
-                flex-direction: column;
+                flex-direction: row;
+                max-width: 900px;
+                height: 320px;
             }
 
-            .modal__image {
-                height: 320px;
-                flex-basis: 320px;
-                border-bottom-left-radius: 0;
-                border-top-right-radius: 26px;
+            .modal__video-container {
+                width: 50%;
+                height: 100%;
             }
 
             .modal__content {
-                height: auto;
-                max-width: 320px;
-                flex-basis: auto;
-                padding: 24px 16px;
-                border-top-right-radius: 0;
-                border-bottom-left-radius: 26px;
+                width: 50%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
             }
 
-            .modal__btn {
-                width: 110px;
-                padding: 0px 18px;
+            .dismiss-btn {
+                margin-top: 10px;
+            }
+        }
+
+        /* Portrait Small Height */
+        @media (max-height: 600px) and (orientation: portrait) {
+            .modal {
+                margin: 10px;
+            }
+
+            .modal__content {
+                padding: 16px;
+            }
+
+            .dismiss-btn {
+                margin-top: 10px;
             }
         }
     </style>
@@ -158,23 +146,22 @@
 <body>
     <div class="overlay">
         <div class="modal">
-            <div class="modal__image">
+            <div class="modal__video-container">
                 <video id="promoVideo" preload="auto" autoplay muted playsinline loop>
                     <source src="https://pastatic.picsart.com/cms-pastatic/ba7a8f37-f8a2-4f0f-9e28-8c34b38d7ce9.mp4" type="video/mp4">
                 </video>
             </div>
             <div class="modal__content">
-                <p class="modal__title">How do you create a logo?</p>
+                <h1 class="modal__title">How do you create a logo?</h1>
                 <p class="modal__text">Upload an image, get a logo—it's that easy.</p>
-                <div class="modal__button-wrap">
-                    <a href="picsart://miniapp_2_editor?package-id=com.picsart.edit.logo-generator&is_auto_close_enabled=false" 
-                       class="modal__btn modal__btn--main" 
-                       data-button-id="0">
-                        Try AI Logo Maker DK2
-                    </a>
-                </div>
+                <a href="picsart://miniapp_2_editor?package-id=com.picsart.edit.logo-generator&is_auto_close_enabled=false" 
+                   class="modal__btn" 
+                   data-button-id="0">
+                    Try AI Logo Maker DK3
+                </a>
             </div>
         </div>
+        <button class="dismiss-btn">Dismiss</button>
     </div>
 </body>
 </html>
